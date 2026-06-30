@@ -1,0 +1,16 @@
+[project]
+name = "tle-auto-dowloader"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Роман Шумаков",email = "romeo46100@mail.ru"}
+]
+requires-python = ">=3.14"
+dependencies = [
+    "requests (>=2.34.2,<3.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
