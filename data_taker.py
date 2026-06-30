@@ -36,7 +36,7 @@ def take_data_from_site():
 
     # Проверяем, что логин прошел успешно (должен быть код 200)
     if response.status_code != 200:
-        print("Не удалось залогиниться, проверь почту и пароль.")
+        print("Не удалось залогиниться, проверь почту, пароль и VPN.")
     else:
         print("Авторизация прошла успешно!")
         authorisation_data = session.get("https://www.space-track.org/app/data/whoami")
