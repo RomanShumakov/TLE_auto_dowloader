@@ -18,7 +18,6 @@ def take_data_from_site():
 
     session = requests.Session()
 
-    # 1. Сначала логинимся
     login_url = 'https://www.space-track.org/ajaxauth/login'
 
     try:
@@ -34,14 +33,9 @@ def take_data_from_site():
             print(f'Пользователь: {authorisation["identity"]} Активность: {authorisation["logged_in"]}')
             print("Выполняю скачивание базы TLE...")
 
-
-            # 2. Выполнение запроса данных (например, TLE)
-            # query_url = 'https://www.space-track.org/basicspacedata/query/class/satcat/limit/1/format/json'
-            # https://www.space-track.org/basicspacedata/query/class/gp/EPOCH/%3Enow-30/orderby/NORAD_CAT_ID,EPOCH/format/3le
-            # "https://www.space-track.org/basicspacedata/query/class/gp/EPOCH/>now-30/MEAN_MOTION/>11.25/format/3le"
-
             try:
-                query_url = 'https://www.space-track.org/basicspacedata/query/class/gp/orderby/EPOCH%20desc/format/json'
+                query_url = 'https://www.space-track.org/basicspacedata/query/class/gp/EPOCH/%3Enow-30/orderby/NORAD_CAT_ID,EPOCH/format/json'
+
                 data_response = session.get(query_url)
 
                 if data_response.status_code != 200:
@@ -83,11 +77,11 @@ def data_writer(data):
 
     print(f"Готово! Записано {len(data)} объектов в файл ALL.txt")
     if lines_count == len(data) * 3:
-        print(f"Проверка целостности пройдена: записано {lines_count} строк.")
+        print(f"Общая проверка целостности пройдена: записано {lines_count} строк.")
     else:
         print(f"Ошибка целостности! Ожидалось {len(data) * 3}, но записано {lines_count}.")
 
 
 if __name__ == "__main__":
-    res_data = take_data_from_site()
-    data_writer(res_data)
+    downloaded_data = take_data_from_site()
+    data_writer(downloaded_data)
