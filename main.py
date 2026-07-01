@@ -82,3 +82,5 @@ def data_writer(data):
 if __name__ == "__main__":
     downloaded_data = take_data_from_site()
     data_writer(downloaded_data)
+
+"https://www.space-track.org/basicspacedata/query/class/gp/EPOCH/%3Enow-30/MEAN_MOTION/%3E11.25/ECCENTRICITY/%3C0.25/OBJECT_TYPE/payload/orderby/NORAD_CAT_ID,EPOCH/format/3le"
