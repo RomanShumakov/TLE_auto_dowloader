@@ -24,7 +24,7 @@
 
 1. **Клонируйте репозиторий**:
    ```bash
-   git clone https://github.com/твой-профиль/tle-auto-downloader.git
+   git clone https://github.com/RomanShumakov/TLE_auto_dowloader.git
    cd tle-auto-downloader
    ```
 
