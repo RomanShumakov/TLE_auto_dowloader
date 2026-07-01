@@ -1,4 +1,5 @@
 import os
+from datetime import datetime
 from dotenv import load_dotenv
 import requests
 
@@ -48,35 +49,36 @@ def take_data_from_site():
         # 2. Теперь делаем сам запрос за данными (например, TLE)
         # работающий юрл:
         # query_url = 'https://www.space-track.org/basicspacedata/query/class/satcat/limit/1/format/json'
-        query_url = 'https://www.space-track.org/basicspacedata/query/class/gp/orderby/EPOCH%20desc/limit/5/format/json'
-
-
-
+        query_url = 'https://www.space-track.org/basicspacedata/query/class/gp/orderby/EPOCH%20desc/format/json'
         data_response = session.get(query_url)
 
         if data_response.status_code != 200:
-            print(f"Ошибка. Не удалось получить данные. Код {data_response.status_code}")
+            print(f"Не удалось получить данные. Код ошибки: {data_response.status_code}")
         else:
-            tles = data_response.json()
-            for entry in tles:
-                # Достаем название спутника и саму TLE-строку
-                name = entry.get('OBJECT_NAME', 'Unknown')
-                tle_line1 = entry.get('TLE_LINE1')
-                tle_line2 = entry.get('TLE_LINE2')
-                print(f"Спутник: {name}\n{tle_line1}\n{tle_line2}\n{'-' * 30}")
-
-        # data_response = session.get(query_url)
-        #
-        # if data_response.status_code == 200:
-        #     print(data_response.json())  # Твои данные тут
-        # else:
-        #     print(f"Ошибка получения данных: {data_response.status_code}")
+            return data_response.json()
 
 
-def json_data_writer(data):
-    pass
+def data_writer(data):
+    today = datetime.now().strftime("%Y-%m-%d")
+
+    folderpath = os.path.join("TLE", today)
+
+    os.makedirs(folderpath, exist_ok=True)
+    file_path = os.path.join(folderpath, 'ALL.txt')
+
+        # Открываем файл satellites.txt в режиме записи ('w')
+    with open(file_path , 'w', encoding='utf-8') as file:
+        for entry in data:
+            name = entry.get('OBJECT_NAME', 'Unknown')
+            tle_line1 = entry.get('TLE_LINE1')
+            tle_line2 = entry.get('TLE_LINE2')
+
+            file.write(f"{name}\n{tle_line1}\n{tle_line2}\n")
+
+    print(f"Готово! Записано {len(data)} объектов в файл ALL.txt")
+
 
 
 if __name__ == "__main__":
-    data = take_data_from_site()
-    print(data)
+    res_data = take_data_from_site()
+    data_writer(res_data)
