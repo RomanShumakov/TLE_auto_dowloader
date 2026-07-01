@@ -3,8 +3,6 @@ from datetime import datetime
 from dotenv import load_dotenv
 import requests
 
-     # url = "https://www.space-track.org/basicspacedata/query/class/gp/EPOCH/>now-30/MEAN_MOTION/>11.25/format/3le"
-
 
 def take_data_from_site():
     load_dotenv()
@@ -53,7 +51,6 @@ def take_data_from_site():
 
 
 def data_writer(data):
-
     if not data:
         print("Данных нет, записывать нечего.")
         return None
@@ -66,7 +63,7 @@ def data_writer(data):
     file_path = os.path.join(folderpath, 'ALL.txt')
 
     lines_count = 0
-    with open(file_path , 'w', encoding='utf-8') as file:
+    with open(file_path, 'w', encoding='utf-8') as file:
         for entry in data:
             name = entry.get('OBJECT_NAME', 'Unknown')
             tle_line1 = entry.get('TLE_LINE1')
