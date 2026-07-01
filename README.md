@@ -50,7 +50,7 @@ poetry run python main.py
 2. TLE Line 1
 3. TLE Line 2
 
-## Технические детали запроса
+## Технические детали
 ### Основной рабочий эндпоинт:
 
 https://www.space-track.org/basicspacedata/query/class/gp/EPOCH/%3Enow-30/orderby/NORAD_CAT_ID,EPOCH/format/json
@@ -77,3 +77,16 @@ https://www.space-track.org/basicspacedata/query/class/gp/EPOCH/>now-30/MEAN_MOT
 https://www.space-track.org/basicspacedata/query/class/satcat/limit/1/format/json
 -   Запрос к каталогу спутников (Satellite Catalog). Содержит общую информацию: дату запуска, статус объекта, страну-владельца.
 Лимит в 1 спутник (limit/1) используется для проверки связи с API или тестирования структуры ответа.
+
+### Идеи для дальнейшего развития проекта
+
+1. Оптимизация выводимой информации
+2. Добавление функций логирования
+3. Добавление возможности обращений через прокси сервер (исключение подключения к VPN)
+4. Автоматизация запросов для получения данных через желаемые интервалы времени
+
+
+
+## Лицензия
+
+Этот проект распространяется под лицензией MIT. Подробную информацию можно найти в файле [LICENSE](LICENSE).
